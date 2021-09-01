@@ -59,7 +59,7 @@ run: create-network
 	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_STORE} up -d; \
 	$(COMPOSE_COMMAND) -f $${THANOS_OBSERVER} up -d
 
-up: build run-daemon
+up: build run
 
 stop:
 	. ./env.sh; \
