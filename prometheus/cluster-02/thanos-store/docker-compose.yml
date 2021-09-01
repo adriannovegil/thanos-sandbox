@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   # Thanos store gateway
-  thanos-store-gateway-cluster-01:
+  thanos-store-gateway-cluster-02:
     image: quay.io/thanos/thanos:v0.18.0
     volumes:
       - ./thanos/:/etc/thanos/

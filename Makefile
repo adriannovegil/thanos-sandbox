@@ -3,8 +3,10 @@
 # Author: Adrian Novegil <adrian.novegil@gmail.com>
 #
 .DEFAULT_GOAL:=help
-IMAGE_PREFIX=hdr
+
+PROJECT_NAME=observability-sandbox
 DOCKER_NETWORK=observabilitysandbox
+COMPOSE_COMMAND=docker-compose --project-name=$(PROJECT_NAME)
 
 # show some help
 help:
@@ -18,10 +20,8 @@ help:
 	@echo '  Common Targets:'
 	@echo '    create-network        Crea la red de Docker para los contenedores'
 	@echo '    build                 Construye todas las imágenes a partir de los Dockerfiles'
-	@echo '    run                   Arranca todos los contenedores necesarios para ejecutar el sistema'
-	@echo '    run-daemon            run en modo daemon'
+	@echo '    run                   Arranca todos los contenedores necesarios para ejecutar el sistema en modo demonio'
 	@echo '    up                    build + run'
-	@echo '    up-daemon             build + run-daemon'
 	@echo '    stop                  Para los contenedores'
 	@echo '    down                  Elimina los contenedores'
 	@echo '    restart               stop + run'
@@ -30,13 +30,6 @@ help:
 	@echo '  Clean Targets:'
 	@echo '    clean-network         Borra la red Docker'
 	@echo '    clean-images          Borra las imágenes creadas'
-	@echo '    clean-orphan-volumes  Elimina los volúmenes huérfanos'
-	@echo '    clean-orphan-images   Elimina las imágenes huérfanas'
-	@echo '    clean-all-images      Elimina todas las imágenes'
-	@echo '    clean-all-containers  Elimina todos los containers'
-	@echo '    clean-all-volumes     Elimina todos los volúmenes'
-	@echo '    clean-all-networks    Elimina todas las redes'
-	@echo '    prune                 Remove all stopped containers, all dangling images, and all unused networks'
 	@echo ''
 
 create-network:
@@ -46,52 +39,44 @@ ifeq ($(shell docker network ls | grep ${DOCKER_NETWORK} | wc -l),0)
 endif
 
 build:
-	@docker-compose -p ${IMAGE_PREFIX} build
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} build
 
 run: create-network
-	@docker-compose -p ${IMAGE_PREFIX} up
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${GRAFANA} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_R1} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_R2} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_OBJ_STORAGE} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_COMPACTOR} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_QUERIER} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C1_STORE} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_R1} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_R2} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_OBJ_STORAGE} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_COMPACTOR} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_QUERIER} up -d; \
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS_C2_STORE} up -d; \
+	$(COMPOSE_COMMAND) -f $${THANOS_OBSERVER} up -d
 
-run-daemon: create-network
-	@docker-compose -p ${IMAGE_PREFIX} up -d
-
-up: build run
-
-up-daemon: build run-daemon
+up: build run-daemon
 
 stop:
-	@docker-compose -p ${IMAGE_PREFIX} stop
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} stop
 
 down:
-	@docker-compose -p ${IMAGE_PREFIX} down
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} down
 
 restart: stop run
 
 status:
-	@docker-compose -p ${IMAGE_PREFIX} ps
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} ps
 
 clean-network:
 	@docker network rm ${DOCKER_NETWORK} | true
 
 clean-images:
-	@docker-compose -p ${IMAGE_PREFIX} down --rmi local | true
-
-clean-orphan-volumes:
-	@docker volume rm $$(docker volume ls -q --filter dangling=true) | true
-
-clean-orphan-images:
-	@docker rmi $$(docker images --quiet --filter "dangling=true") | true
-
-clean-all-images:
-	@docker rmi -f $$(docker images) | true
-
-clean-all-containers:
-	@docker rm -f $$(docker ps -a -q) | true
-
-clean-all-volumes:
-	@docker volume rm $$(docker volume ls -q)
-
-clean-all-networks:
-	@docker network rm $$(docker network ls) | true
-
-prune:
-	@docker system prune
+	$(COMPOSE_COMMAND) down --rmi local | true

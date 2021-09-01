@@ -37,7 +37,6 @@ services:
       - '--objstore.config-file=/etc/thanos/bucket_config.yaml'
     depends_on:
       - prometheus-server-cluster-01-r2
-      - minio-cluster-01
     networks:
       - observabilitysandbox
     restart: always
