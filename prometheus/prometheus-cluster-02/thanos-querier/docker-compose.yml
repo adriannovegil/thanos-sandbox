@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # Thanos querier
+  thanos-querier-cluster-02:
+    image: quay.io/thanos/thanos:v0.18.0
+    command:
+      - 'query'
+      - '--grpc-address=0.0.0.0:10091'
+      - '--http-address=0.0.0.0:10902'
+      - '--query.replica-label=replica'
+      - '--store=thanos-sidecar-prometheus-cluster-02-r1:10091'
+      - '--store=thanos-sidecar-prometheus-cluster-02-r2:10091'
+      - '--store=thanos-store-gateway-cluster-02:10091'
+    ports:
+      - 10904:10902
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

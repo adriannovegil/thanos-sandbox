@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Thanos compactor
+  thanos-compactor-cluster-01:
+    image: quay.io/thanos/thanos:v0.18.0
+    volumes:
+      - ./thanos/:/etc/thanos/
+    command:
+      - 'compact'
+      - '--log.level=debug'
+      - '--data-dir=/data'
+      - '--objstore.config-file=/etc/thanos/bucket_config.yaml'
+      - '--wait'
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

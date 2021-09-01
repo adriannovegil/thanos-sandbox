@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Thanos bucket web
+  thanos-bucket-web-cluster-02:
+    image: quay.io/thanos/thanos:v0.18.0
+    volumes:
+      - ./thanos/:/etc/thanos/
+    command:
+      - 'tools'
+      - 'bucket'
+      - 'web'
+      - '--http-address=0.0.0.0:10902'
+      - '--log.level=debug'
+      - '--objstore.config-file=/etc/thanos/bucket_config.yaml'
+      - '--refresh=5m'
+      - '--timeout=2m'
+      - '--label=replica'
+    ports:
+      - 10922:10902
+    depends_on:
+      - minio-cluster-02
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+  # Minio storage
+  minio-cluster-02:
+    image: minio/minio:RELEASE.2020-05-01T22-19-14Z
+    volumes:
+      - minio_cluster02_data:/data
+    entrypoint: sh
+    command: -c 'mkdir -p /data/cluster-02-bucket && /usr/bin/minio server /data'
+    environment:
+      - MINIO_ACCESS_KEY=smth
+      - MINIO_SECRET_KEY=Need8Chars
+      - MINIO_PROMETHEUS_AUTH_TYPE=public
+    ports:
+      - 9020:9000
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+volumes:
+  minio_cluster02_data: {}
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true
