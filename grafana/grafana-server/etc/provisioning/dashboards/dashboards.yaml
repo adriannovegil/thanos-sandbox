@@ -1,0 +1,25 @@
+apiVersion: 1
+
+providers:
+  - name: 'DHT22'
+    orgId: 1
+    folder: 'DHT22'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/dht22
+  - name: 'Shelly'
+    orgId: 1
+    folder: 'Shelly'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/shelly
