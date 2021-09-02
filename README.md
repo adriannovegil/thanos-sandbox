@@ -59,8 +59,17 @@ I configure two replicas for each Prometheus server.
 We have multiple clusters with Thanos already installed. We need to configure a Thanos customresource with endpoints that point to these clusters.
 
 
-| Component                                  | Description                                                 | Port                                |
-| ---------------------------------------    | --------------------------------------------------------    | --------------------------------    |
-| `prometheus-server-cluster-02-r1`          | Prometheus (`labels: cluster=cluster-02, replica=r1`)       | [`10902`](http://localhost:10902)   |
+| Component                                  | Description                                                 | Port                               |
+| ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
+| `prometheus-server-cluster-02-r1`          | Prometheus (`labels: cluster=cluster-02, replica=r1`)       | [`10902`](http://localhost:10902)  |
 
 ### Alerting
+
+Alerting services
+
+| Component                                  | Description                                                 | Port                               |
+| ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
+| `alertmanager`                             | Alertmanager                                                | [`9083`](http://localhost:9083)    |
+| `thanos-querier`                           | Thanos Querier                                              | [`10902`](http://localhost:10902)  |
+| `thanos-ruler-cluster-01`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
+| `thanos-ruler-cluster-02`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |

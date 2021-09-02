@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # Alert Manager
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yaml'
+      - '--storage.path=/alertmanager'
+    ports:
+      - 9083:9093
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

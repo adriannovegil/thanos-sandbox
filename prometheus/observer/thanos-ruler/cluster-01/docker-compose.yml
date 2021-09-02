@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Thanos ruler
+  thanos-ruler-cluster-01:
+    image: quay.io/thanos/thanos:v0.18.0
+    volumes:
+      - ./thanos/:/etc/thanos/
+    command:
+      - 'rule'
+      - '--grpc-address=0.0.0.0:10091'
+      - '--http-address=0.0.0.0:10902'
+      - '--log.level=debug'
+      - '--data-dir=/data'
+      - '--eval-interval=15s'
+      - '--rule-file=/etc/thanos/*.rules.yaml'
+      - '--alertmanagers.url=http://alertmanager:9093'
+      - '--query=thanos-querier-cluster-01:10902'
+      - '--objstore.config-file=/etc/thanos/bucket_config.yaml'
+      - "--label=ruler_cluster=\"cluster01\""
+      - "--label=ruler_replica=\"r1\""
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true
