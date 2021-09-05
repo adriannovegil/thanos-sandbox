@@ -3,22 +3,16 @@ groups:
     rules:
       - alert: PrometheusReplicaDown
         annotations:
-          message: 'Prometheus replica in cluster {{$labels.cluster}}
-
-            has disappeared from Prometheus target discovery.'
+          message: 'Prometheus replica in cluster {{$labels.cluster}} has disappeared from Prometheus target discovery.'
         expr: |
           label_replace(
-            absent(sum(up{job="prometheus",
-            cluster="cluster01",
-            instance=~".*:9090"}) by (job, cluster) == 2),
+            absent(sum(up{job="prometheus", cluster="cluster01", instance=~".*:9090"}) by (job, cluster) == 2),
             "cluster", "cluster01", "",""
           )
           or
           label_replace(
-            absent(sum(up{job="prometheus",
-            cluster="cluster01",
-            instance=~".*:9090"}) by (job, cluster) == 2),
-            "cluster", "cluster01", "",""
+            absent(sum(up{job="prometheus", cluster="cluster02", instance=~".*:9090"}) by (job, cluster) == 2),
+            "cluster", "cluster02", "",""
           )
         for: 15s  # for demo purposes
         labels:

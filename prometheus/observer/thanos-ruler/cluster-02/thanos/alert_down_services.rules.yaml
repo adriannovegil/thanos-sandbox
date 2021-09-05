@@ -9,9 +9,9 @@ groups:
         expr: |
           label_replace(
             absent(sum(up{job="prometheus",
-            cluster="cluster02",
+            cluster="cluster01",
             instance=~".*:9090"}) by (job, cluster) == 2),
-            "cluster", "cluster02", "",""
+            "cluster", "cluster01", "",""
           )
           or
           label_replace(
