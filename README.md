@@ -73,3 +73,12 @@ Alerting services
 | `thanos-querier`                           | Thanos Querier                                              | [`10902`](http://localhost:10902)  |
 | `thanos-ruler-cluster-01`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
 | `thanos-ruler-cluster-02`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
+
+### Host Metrics
+
+Host metrics
+
+| Component                                  | Description                                                 | Port                               |
+| ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
+| `cadvisor`                                 | cAdvisor                                                    | [`8080`](http://localhost:8080)    |
+| `node-exporter`                            | Node Exporter                                               | [`9100`](http://localhost:9100)    |

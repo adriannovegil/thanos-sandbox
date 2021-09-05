@@ -3,8 +3,9 @@ version: '3.8'
 services:
   # Grafana
   grafana-server:
-    image: grafana/grafana:7.2.0
+    image: grafana/grafana:8.1.2
     environment:
+      - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_INSTALL_PLUGINS=grafana-piechart-panel

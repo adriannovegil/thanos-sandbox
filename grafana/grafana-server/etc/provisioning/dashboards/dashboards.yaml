@@ -1,9 +1,9 @@
 apiVersion: 1
 
 providers:
-  - name: 'DHT22'
+  - name: 'Host Metrics'
     orgId: 1
-    folder: 'DHT22'
+    folder: 'Host Metrics'
     folderUid: ''
     type: file
     disableDeletion: true
@@ -11,7 +11,7 @@ providers:
     updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
     allowUiUpdates: true
     options:
-      path: /var/lib/grafana/dashboards/dht22
+      path: /var/lib/grafana/dashboards/host-metrics
   - name: 'Shelly'
     orgId: 1
     folder: 'Shelly'

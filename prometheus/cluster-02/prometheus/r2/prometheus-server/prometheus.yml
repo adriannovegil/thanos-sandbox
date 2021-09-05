@@ -11,13 +11,40 @@ global:
     replica: 'r2'
 
 scrape_configs:
-# Prometheus self monitoring
-- job_name: prometheus
-  honor_timestamps: true
-  scrape_interval: 15s
-  scrape_timeout: 10s
-  metrics_path: /metrics
-  scheme: http
-  static_configs:
-    - targets:
-      - localhost:9090
+  # Prometheus self monitoring
+  - job_name: prometheus
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+        - prometheus-server-cluster-02-r1:9090
+        - prometheus-server-cluster-02-r2:9090
+
+  - job_name: 'thanoscluster02'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+          - 'thanos-sidecar-prometheus-cluster-02-r1:10902'
+          - 'thanos-sidecar-prometheus-cluster-02-r2:10902'
+          - 'thanos-querier-cluster-02:10902'
+          - 'thanos-store-gateway-cluster-02:10902'
+          - 'thanos-compactor-cluster-02:10902'
+
+  - job_name: 'miniocluster02'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['minio-cluster-02:9000']
+    metrics_path: /minio/prometheus/metrics
+
+  - job_name: 'nodeexporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'cadvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['cadvisor:8080']
