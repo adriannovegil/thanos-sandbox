@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Prometheus + sidecar - cluster-01 - r2
   prometheus-server-cluster-01-r2:
-    image: prom/prometheus:v2.26.0
+    image: prom/prometheus:v2.29.2
     volumes:
       - ./prometheus-server/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheusserver_cluster01_r2_data:/prometheus
@@ -24,7 +24,7 @@ services:
       org.label-schema.group: "observability"
 
   thanos-sidecar-prometheus-cluster-01-r2:
-    image: quay.io/thanos/thanos:v0.18.0
+    image: quay.io/thanos/thanos:v0.21.1
     volumes:
       - ./thanos/:/etc/thanos/
       - prometheusserver_cluster01_r2_data:/prometheus

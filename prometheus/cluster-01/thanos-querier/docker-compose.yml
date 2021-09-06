@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Thanos querier
   thanos-querier-cluster-01:
-    image: quay.io/thanos/thanos:v0.18.0
+    image: quay.io/thanos/thanos:v0.21.1
     command:
       - 'query'
       - '--grpc-address=0.0.0.0:10091'

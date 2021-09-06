@@ -5,7 +5,7 @@ DOCKER_COMPOSE_FILE_NAME="docker-compose.yml"
 GRAFANA_FOLDER="grafana"
 HOST_METRICS_FOLDER="host-metrics"
 PROMETHEUS_FOLDER="prometheus"
-OBSERVER_FOLDER="prometheus/observer"
+OBSERVER_FOLDER="observer"
 
 CLUSTER_01="cluster-01"
 CLUSTER_02="cluster-02"
