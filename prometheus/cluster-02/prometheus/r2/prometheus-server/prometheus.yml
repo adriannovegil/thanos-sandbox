@@ -23,14 +23,29 @@ scrape_configs:
         - prometheus-server-cluster-02-r1:9090
         - prometheus-server-cluster-02-r2:9090
 
-  - job_name: 'thanoscluster02'
+  - job_name: 'thanos.thanos-sidecar.cluster02'
     scrape_interval: 15s
     static_configs:
       - targets:
           - 'thanos-sidecar-prometheus-cluster-02-r1:10902'
           - 'thanos-sidecar-prometheus-cluster-02-r2:10902'
+
+  - job_name: 'thanos.thanos-query.cluster02'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
           - 'thanos-querier-cluster-02:10902'
+
+  - job_name: 'thanos.thanos-store.cluster02'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
           - 'thanos-store-gateway-cluster-02:10902'
+
+  - job_name: 'thanos.thanos-compact.cluster02'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
           - 'thanos-compactor-cluster-02:10902'
 
   - job_name: 'miniocluster02'
