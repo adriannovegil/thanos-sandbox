@@ -38,7 +38,7 @@ I configure two replicas for each Prometheus server.
 | `thanos-querier-cluster-01`                | Thanos Querier                                              | [`10903`](http://localhost:10903)  |
 | `thanos-store-gateway-cluster-01`          | Thanos Store                                                | N/A                                |
 | `thanos-bucket-web-cluster-01`             | Web interface for remote storage bucket                     | [`10912`](http://localhost:10912)  |
-| `minio-cluster-01`                         | Minio - Amazon S3 Compatible Object Storage                 | [`9010`](http://localhost:9010)    |
+| `minio-cluster-01`                         | Minio - Amazon S3 Compatible Object Storage                 | [`9011`](http://localhost:9011)    |
 
 `cluster-02`
 
@@ -52,7 +52,7 @@ I configure two replicas for each Prometheus server.
 | `thanos-querier-cluster-02`                | Thanos Querier                                              | [`10904`](http://localhost:10904)  |
 | `thanos-store-gateway-cluster-02`          | Thanos Store                                                | N/A                                |
 | `thanos-bucket-web-cluster-01`             | Web interface for remote storage bucket                     | [`10922`](http://localhost:10922)  |
-| `minio-cluster-01`                         | Minio - Amazon S3 Compatible Object Storage                 | [`9020`](http://localhost:9020)    |
+| `minio-cluster-01`                         | Minio - Amazon S3 Compatible Object Storage                 | [`9021`](http://localhost:9021)    |
 
 `thanos-observer`
 

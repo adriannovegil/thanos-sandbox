@@ -28,17 +28,18 @@ services:
 
   # Minio storage
   minio-cluster-01:
-    image: minio/RELEASE.2021-09-03T03-56-13Z.fips
+    image: minio/minio:RELEASE.2021-09-03T03-56-13Z
     volumes:
       - minio_cluster01_data:/data
     entrypoint: sh
-    command: -c 'mkdir -p /data/cluster-01-bucket && /usr/bin/minio server /data'
+    command: -c 'mkdir -p /data/cluster-01-bucket && /usr/bin/minio server /data --console-address ":9001"'
     environment:
       - MINIO_ACCESS_KEY=smth
       - MINIO_SECRET_KEY=Need8Chars
       - MINIO_PROMETHEUS_AUTH_TYPE=public
     ports:
       - 9010:9000
+      - 9011:9001
     networks:
       - observabilitysandbox
     restart: always

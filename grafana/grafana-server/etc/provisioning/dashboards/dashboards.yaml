@@ -12,9 +12,9 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards/host-metrics
-  - name: 'Shelly'
+  - name: 'Prometheus'
     orgId: 1
-    folder: 'Shelly'
+    folder: 'Prometheus'
     folderUid: ''
     type: file
     disableDeletion: true
@@ -22,4 +22,26 @@ providers:
     updateIntervalSeconds: 10
     allowUiUpdates: true
     options:
-      path: /var/lib/grafana/dashboards/shelly
+      path: /var/lib/grafana/dashboards/prometheus
+  - name: 'Thanos'
+    orgId: 1
+    folder: 'Thanos'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/thanos
+  - name: 'Minio'
+    orgId: 1
+    folder: 'Minio'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/minio

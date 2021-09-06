@@ -35,9 +35,9 @@ scrape_configs:
 
   - job_name: 'miniocluster01'
     scrape_interval: 5s
+    metrics_path: /minio/v2/metrics/cluster
     static_configs:
       - targets: ['minio-cluster-01:9000']
-    metrics_path: /minio/prometheus/metrics
 
   - job_name: 'nodeexporter'
     scrape_interval: 5s
