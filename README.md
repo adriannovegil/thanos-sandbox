@@ -2,6 +2,12 @@
 
 Get up and running with Prometheus, Thanos, Grafana, and more using Docker and Docker Compose
 
+## Architecture Scheme
+
+Following you can see an architecture scheme of the system.
+
+![Architecture Scheme](./doc/images/architecture.png)
+
 ## Fast Run
 
 Clone this repo and execute the following command:
@@ -32,7 +38,7 @@ I configure two replicas for each Prometheus server.
 | ---------------------------------------    | --------------------------------------------------------    | -------------------------------    |
 | `prometheus-server-cluster-01-r1`          | Prometheus (`labels: cluster=cluster-01, replica=r1`)       | [`9090`](http://localhost:9090)    |
 | `prometheus-server-cluster-01-r2`          | Prometheus (`labels: cluster=cluster-01, replica=r2`)       | [`9092`](http://localhost:9092)    |
-| `thanos-sidecar-prometheus-cluster-01-r1`  | Thanos Sidecar for Prometheus Server 1                      |N/A                                 |
+| `thanos-sidecar-prometheus-cluster-01-r1`  | Thanos Sidecar for Prometheus Server 1                      | N/A                                |
 | `thanos-sidecar-prometheus-cluster-01-r2`  | Thanos Sidecar for Prometheus Server 2                      | N/A                                |
 | `thanos-compactor-cluster-01`              | Thanos Compactor                                            | N/A                                |
 | `thanos-querier-cluster-01`                | Thanos Querier                                              | [`10903`](http://localhost:10903)  |
@@ -61,7 +67,7 @@ We have multiple clusters with Thanos already installed. We need to configure a 
 
 | Component                                  | Description                                                 | Port                               |
 | ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
-| `prometheus-server-cluster-02-r1`          | Prometheus (`labels: cluster=cluster-02, replica=r1`)       | [`10902`](http://localhost:10902)  |
+| `thanos-querier`                           | Thanos Querier                                              | [`10902`](http://localhost:10902)  |
 
 ### Alerting
 
@@ -70,7 +76,6 @@ Alerting services
 | Component                                  | Description                                                 | Port                               |
 | ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
 | `alertmanager`                             | Alertmanager                                                | [`9083`](http://localhost:9083)    |
-| `thanos-querier`                           | Thanos Querier                                              | [`10902`](http://localhost:10902)  |
 | `thanos-ruler-cluster-01`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
 | `thanos-ruler-cluster-02`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
 
