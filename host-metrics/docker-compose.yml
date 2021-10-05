@@ -31,7 +31,7 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
       - /cgroup:/cgroup:ro
     ports:
-      - 8080:8080
+      - 8010:8080
     privileged: true
     devices:
       - /dev/kmsg:/dev/kmsg

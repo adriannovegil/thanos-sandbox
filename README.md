@@ -85,5 +85,5 @@ Host metrics
 
 | Component                                  | Description                                                 | Port                               |
 | ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
-| `cadvisor`                                 | cAdvisor                                                    | [`8080`](http://localhost:8080)    |
+| `cadvisor`                                 | cAdvisor                                                    | [`8080`](http://localhost:8010)    |
 | `node-exporter`                            | Node Exporter                                               | [`9100`](http://localhost:9100)    |
