@@ -1,9 +1,9 @@
 apiVersion: 1
 
 providers:
-  - name: 'Host Metrics'
+  - name: 'Docker Metrics'
     orgId: 1
-    folder: 'Host Metrics'
+    folder: 'Docker Metrics'
     folderUid: ''
     type: file
     disableDeletion: true
@@ -11,7 +11,7 @@ providers:
     updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
     allowUiUpdates: true
     options:
-      path: /var/lib/grafana/dashboards/host-metrics
+      path: /var/lib/grafana/dashboards/docker-metrics
   - name: 'Prometheus'
     orgId: 1
     folder: 'Prometheus'
@@ -44,4 +44,4 @@ providers:
     updateIntervalSeconds: 10
     allowUiUpdates: true
     options:
-      path: /var/lib/grafana/dashboards/minio  
+      path: /var/lib/grafana/dashboards/minio
