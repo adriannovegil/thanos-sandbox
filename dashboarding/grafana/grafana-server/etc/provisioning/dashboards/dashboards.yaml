@@ -1,50 +1,6 @@
 apiVersion: 1
 
 providers:
-  - name: 'Host Metrics'
-    orgId: 1
-    folder: 'Host Metrics'
-    folderUid: ''
-    type: file
-    disableDeletion: true
-    editable: true
-    updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
-    allowUiUpdates: true
-    options:
-      path: /var/lib/grafana/dashboards/host-metrics
-  - name: 'Prometheus'
-    orgId: 1
-    folder: 'Prometheus'
-    folderUid: ''
-    type: file
-    disableDeletion: true
-    editable: true
-    updateIntervalSeconds: 10
-    allowUiUpdates: true
-    options:
-      path: /var/lib/grafana/dashboards/prometheus
-  - name: 'Thanos'
-    orgId: 1
-    folder: 'Thanos'
-    folderUid: ''
-    type: file
-    disableDeletion: true
-    editable: true
-    updateIntervalSeconds: 10
-    allowUiUpdates: true
-    options:
-      path: /var/lib/grafana/dashboards/thanos
-  - name: 'Minio'
-    orgId: 1
-    folder: 'Minio'
-    folderUid: ''
-    type: file
-    disableDeletion: true
-    editable: true
-    updateIntervalSeconds: 10
-    allowUiUpdates: true
-    options:
-      path: /var/lib/grafana/dashboards/minio
   - name: 'Spring Petclinic'
     orgId: 1
     folder: 'Petclinic'

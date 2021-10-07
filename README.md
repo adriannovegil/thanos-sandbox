@@ -79,13 +79,25 @@ Alerting services
 | `thanos-ruler-cluster-01`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
 | `thanos-ruler-cluster-02`                  | Thanos Ruler (`labels: cluster=cluster-01`)                 | N/A                                |
 
-### Host Metrics
+### Self Monitoring
+
+Dashboarding
+
+| Component                                  | Description                                                 | Port                               |
+| ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
+| `grafana-server-self`                      | Grafana                                                     | [`3001`](http://localhost:3001)    |
+
+Prometheus
+
+| Component                                  | Description                                                 | Port                               |
+| ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
+| `prometheus-server-self-monitoring`        | Prometheus (`self: self`)                                   | [`9099`](http://localhost:9099)    |
 
 Host metrics
 
 | Component                                  | Description                                                 | Port                               |
 | ---------------------------------------    | --------------------------------------------------------    | --------------------------------   |
-| `cadvisor`                                 | cAdvisor                                                    | [`8080`](http://localhost:8010)    |
+| `cadvisor`                                 | cAdvisor                                                    | [`8010`](http://localhost:8010)    |
 | `node-exporter`                            | Node Exporter                                               | [`9100`](http://localhost:9100)    |
 
 ## Contributing
