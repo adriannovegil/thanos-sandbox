@@ -11,8 +11,8 @@ global:
     replica: 'r1'
 
 scrape_configs:
-  # Prometheus self monitoring
-  - job_name: prometheus
+  # MQTT 2 Prometheus application - EU zone - dth22
+  - job_name: mqtt2prometheus-dth22-eu
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -20,46 +20,37 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-        - prometheus-server-cluster-02-r1:9090
-        - prometheus-server-cluster-02-r2:9090
+        - mqtt-2-prometheus-dht22-eu:9641
 
-  - job_name: 'thanos.thanos-sidecar.cluster02'
+  # MQTT 2 Prometheus application - US zone - dth22
+  - job_name: mqtt2prometheus-dth22-us
+    honor_timestamps: true
     scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
     static_configs:
       - targets:
-          - 'thanos-sidecar-prometheus-cluster-02-r1:10902'
-          - 'thanos-sidecar-prometheus-cluster-02-r2:10902'
+        - mqtt-2-prometheus-dht22-us:9641
 
-  - job_name: 'thanos.thanos-query.cluster02'
+  # MQTT 2 Prometheus application - EU zone - shelly
+  - job_name: mqtt2prometheus-shelly-eu
+    honor_timestamps: true
     scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
     static_configs:
       - targets:
-          - 'thanos-querier-cluster-02:10902'
+        - mqtt-2-prometheus-shelly-eu:9641
 
-  - job_name: 'thanos.thanos-store.cluster02'
+  # MQTT 2 Prometheus application - US zone - shelly
+  - job_name: mqtt2prometheus-shelly-us
+    honor_timestamps: true
     scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
     static_configs:
       - targets:
-          - 'thanos-store-gateway-cluster-02:10902'
-
-  - job_name: 'thanos.thanos-compact.cluster02'
-    scrape_interval: 15s
-    static_configs:
-      - targets:
-          - 'thanos-compactor-cluster-02:10902'
-
-  - job_name: 'miniocluster02'
-    scrape_interval: 5s
-    metrics_path: /minio/v2/metrics/cluster
-    static_configs:
-      - targets: ['minio-cluster-02:9000']
-
-  - job_name: 'nodeexporter'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['node-exporter:9100']
-
-  - job_name: 'cadvisor'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['cadvisor:8080']
+        - mqtt-2-prometheus-shelly-us:9641
